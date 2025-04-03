@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events</title>
+
+    <div th:replace="~{ fragments/fragments :: favicon}"></div>
+    <div th:replace="~{ fragments/fragments :: tailwind}"></div>
+  </head>
+  <body th:object="${event}">
+    <div th:replace="~{ fragments/fragments :: navbar}"></div>
+    <!-- title -->
+    <h1
+      th:if="${edit}"
+      class="text-5xl text-slate-700 font-bold italic text-center pt-10 pb-10"
+    >
+      Modifica [[${event.name}]]
+    </h1>
+    <h1
+      th:unless="${edit}"
+      class="text-5xl text-slate-700 font-bold italic text-center pt-10 pb-10"
+    >
+      Aggiungi evento
+    </h1>
+    <form
+      th:action="${edit} ? @{/events/edit/{id}(id = ${ingredient.id})} : @{/events/create}"
+      th:object="${event}"
+      method="post"
+      class="flex flex-col justify-center gap-3 w-2/3 mx-auto p-5"
+    >
+      <div class="flex gap-3">
+        <!-- name input -->
+        <div class="grow">
+          <div class="flex flex-col">
+            <label for="name">Nome</label>
+            <input
+              class="border ps-2 py-1 rounded"
+              type="text"
+              id="name"
+              th:field="*{name}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('name')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('name')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+        <!-- category input -->
+        <div class="grow">
+          <div class="flex flex-col w-full">
+            <label for="category">Categoria</label>
+            <input
+              class="border ps-2 py-1 rounded"
+              type="text"
+              id="category"
+              th:field="*{category}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('category')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('category')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <!-- textarea input -->
+      <div class="flex flex-col">
+        <label for="description">Descrizione</label>
+        <textarea
+          th:field="*{description}"
+          th:errorClass="bg-red-200"
+          id="description"
+          class="border ps-2 py-1 rounded"
+        ></textarea>
+        <!-- validazione -->
+        <div th:if="${#fields.hasErrors('description')}">
+          <div
+            class="italic text-slate-500"
+            th:each="error : ${#fields.errors('description')}"
+            th:text="${error}"
+          ></div>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <!-- startDate input -->
+        <div class="grow">
+          <div class="flex flex-col">
+            <label for="startDate">Data di inizio</label>
+            <input
+              class="border ps-2 py-1 rounded"
+              type="date"
+              id="startDate"
+              th:field="*{startDate}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('startDate')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('startDate')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+        <!-- endDate input -->
+        <div class="grow">
+          <div class="flex flex-col w-full">
+            <label for="endDate">Data di fine</label>
+            <input
+              class="border ps-2 py-1 rounded"
+              type="date"
+              id="endDate"
+              th:field="*{endDate}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('endDate')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('endDate')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="bg-blue-500 px-3 py-1 rounded-2xl text-white hover:bg-blue-600 cursor-pointer"
+        type="submit"
+      >
+        Invia
+      </button>
+    </form>
+  </body>
+</html>

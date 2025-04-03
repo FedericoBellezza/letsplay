@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- favicon -->
+    <link
+      th:fragment="favicon"
+      rel="shortcut icon"
+      href="https://static.vecteezy.com/system/resources/previews/015/723/716/non_2x/pizza-hand-drawn-sketch-style-free-png.png"
+      type="image/x-icon"
+    />
+
+    <!-- tailwind -->
+    <script
+      th:fragment="tailwind"
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+    ></script>
+  </head>
+  <body>
+    <nav
+      th:fragment="navbar"
+      class="w-full flex justify-between items-center bg-green-500 px-10 py-3 mb-10"
+    >
+      <div class="text-white">
+        <a href="/events" class="text-3xl font-bold italic me-10">Let'sPlay</a>
+        <div class="flex gap-5 text-xl">
+          <a class="hover:underline" href="/events">Eventi</a>
+          <a class="hover:underline" href="/events">Categorie</a>
+          <a class="hover:underline" href="/events">Squadre</a>
+        </div>
+      </div>
+      <div class="flex items-center text-white gap-7 text-xl">
+        <span>Utente: <span class="font-bold">Federico</span></span>
+        <span>Permessi: <span class="font-bold">ADMIN</span></span>
+        <a
+          href="/events"
+          class="bg-red-700 hover:bg-red-800 rounded-lg px-3 py-2"
+          >Logout</a
+        >
+      </div>
+    </nav>
+  </body>
+</html>
