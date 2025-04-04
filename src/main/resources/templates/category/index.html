@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events</title>
+
+    <div th:replace="~{ fragments/fragments :: favicon}"></div>
+    <div th:replace="~{ fragments/fragments :: tailwind}"></div>
+  </head>
+  <body>
+    <div th:replace="~{ fragments/fragments :: navbar}"></div>
+    <div class="flex items-center">
+      <div class="w-1/3"></div>
+      <h1 class="text-5xl text-center font-bold w-1/3">Categorie</h1>
+      <a
+        class="bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-2"
+        href="/categories/create"
+        >Aggiungi categoria</a
+      >
+    </div>
+
+    <div class="w-full my-10">
+      <table class="border mx-auto text-center">
+        <thead>
+          <tr class="border">
+            <th class="py-1">id</th>
+            <th class="py-1">Nome</th>
+            <th class="px-10 py-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="category : ${categories}" th:object="${category}">
+            <td class="px-5 py-1" th:text="*{id}"></td>
+            <td class="px- py-1" th:text="*{name}"></td>
+
+            <td class="px-3 py-1 flex justify-around items-center">
+              <div class="py-3">
+                <a
+                  class="bg-green-500 text-white px-3 py-2 hover:bg-green-600 rounded-2xl"
+                  th:href="@{/categories/edit/{id}(id = *{id})}"
+                  >Modifica</a
+                >
+                <a
+                  class="bg-red-500 text-white px-3 py-2 hover:bg-red-600 rounded-2xl"
+                  th:href="@{/events/{id}(id = *{id})}"
+                  >Elimina</a
+                >
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

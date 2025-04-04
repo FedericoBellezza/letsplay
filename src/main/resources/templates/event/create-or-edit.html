@@ -19,12 +19,12 @@
     </h1>
     <h1
       th:unless="${edit}"
-      class="text-5xl text-slate-700 font-bold italic text-center pt-10 pb-10"
+      class="text-5xl text-slate-700 font-bold italic text-center pt-10 pb-5"
     >
       Aggiungi evento
     </h1>
     <form
-      th:action="${edit} ? @{/events/edit/{id}(id = ${ingredient.id})} : @{/events/create}"
+      th:action="${edit} ? @{/events/edit/{id}(id = ${event.id})} : @{/events/create}"
       th:object="${event}"
       method="post"
       class="flex flex-col justify-center gap-3 w-2/3 mx-auto p-5"
@@ -55,13 +55,19 @@
         <div class="grow">
           <div class="flex flex-col w-full">
             <label for="category">Categoria</label>
-            <input
+
+            <select
+              th:field="${event.category}"
               class="border ps-2 py-1 rounded"
-              type="text"
+              name="category"
               id="category"
-              th:field="*{category}"
-              th:errorClass="bg-red-200"
-            />
+            >
+              <option
+                th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category}"
+              ></option>
+            </select>
           </div>
           <!-- validazione -->
           <div th:if="${#fields.hasErrors('category')}">
@@ -77,10 +83,21 @@
       <div class="flex flex-col">
         <label for="description">Descrizione</label>
         <textarea
+          placeholder="⚽🏆 Sta per partire il Torneo delle Valli, l’imperdibile appuntamento amatoriale di calcio a 5 che per un mese intero accenderà la passione, la competizione e il divertimento tra amici e squadre locali!
+
+💶 Quota di iscrizione: €120 a squadra
+🚿 Servizi inclusi: accesso agli spogliatoi, docce e parcheggio gratuito
+👥 Aperto a tutti: gruppi di amici, colleghi, squadre locali
+🎯 Formula torneo: fase a gironi + eliminazione diretta
+🏅 Premi: trofei per le prime classificate, premi individuali (MVP, miglior portiere, capocannoniere)
+
+Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove amicizie e godersi l’atmosfera del vero calcio di quartiere.
+
+📞 Info e iscrizioni: [inserisci contatto email, telefono o link]"
           th:field="*{description}"
           th:errorClass="bg-red-200"
           id="description"
-          class="border ps-2 py-1 rounded"
+          class="border ps-2 py-1 rounded min-h-[300px]"
         ></textarea>
         <!-- validazione -->
         <div th:if="${#fields.hasErrors('description')}">
@@ -92,6 +109,7 @@
         </div>
       </div>
 
+      <!-- start and end date container -->
       <div class="flex gap-3">
         <!-- startDate input -->
         <div class="grow">
@@ -131,6 +149,102 @@
             <div
               class="italic text-slate-500"
               th:each="error : ${#fields.errors('endDate')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- address and image container -->
+      <div class="flex gap-3">
+        <!-- address input -->
+        <div class="grow">
+          <div class="flex flex-col">
+            <label for="address">Indirizzo</label>
+            <input
+              class="border ps-2 py-1 rounded"
+              type="text"
+              id="address"
+              th:field="*{address}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('address')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('address')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+        <!-- image input -->
+        <div class="grow">
+          <div class="flex flex-col">
+            <label for="image">Immagine di locandina</label>
+            <input
+              placeholder="Possibilmente verticale"
+              class="border ps-2 py-1 rounded"
+              type="text"
+              id="image"
+              th:field="*{image}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('image')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('image')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <!-- open and close registration date container -->
+      <div class="flex gap-3">
+        <!-- registrationOpeningDate input -->
+        <div class="grow">
+          <div class="flex flex-col">
+            <label for="registrationOpeningDate"
+              >Data di apertura iscrizioni</label
+            >
+            <input
+              class="border ps-2 py-1 rounded"
+              th:type="date"
+              id="registrationOpeningDate"
+              th:field="*{registrationOpeningDate}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('registrationOpeningDate')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('registrationOpeningDate')}"
+              th:text="${error}"
+            ></div>
+          </div>
+        </div>
+        <!-- registrationClosingDate input -->
+        <div class="grow">
+          <div class="flex flex-col w-full">
+            <label for="registrationClosingDate"
+              >Data di chiusura iscrizioni</label
+            >
+            <input
+              class="border ps-2 py-1 rounded"
+              type="date"
+              id="registrationClosingDate"
+              th:field="*{registrationClosingDate}"
+              th:errorClass="bg-red-200"
+            />
+          </div>
+          <!-- validazione -->
+          <div th:if="${#fields.hasErrors('registrationClosingDate')}">
+            <div
+              class="italic text-slate-500"
+              th:each="error : ${#fields.errors('registrationClosingDate')}"
               th:text="${error}"
             ></div>
           </div>

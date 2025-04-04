@@ -11,9 +11,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "events")
@@ -24,27 +26,34 @@ public class Event {
     private Integer id;
 
     @NotBlank(message = "Inserisci un nome valido")
+    @Size(max = 20, message = "Il nome dell'evento può essere lungo massimo 20 caratteri")
     private String name;
 
     @Lob
     private String description;
 
+    
+    private String image;
+
     @Lob
     @NotBlank(message = "Inserisci un indirizzo valido")
     private String address;
 
+    @NotNull(message = "Inserisci una data valida")
     private LocalDate startDate;
 
+    @NotNull(message = "Inserisci una data valida")
     private LocalDate endDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    
-    @NotNull(message = "Inserire aperte o chiuse")
-    private Boolean isRegistrationOpen = true;
 
+    @NotNull(message = "Inserisci una data valida")
     private LocalDate registrationClosingDate;
+
+    @NotNull(message = "Inserisci una data valida")
+    private LocalDate registrationOpeningDate;
     
     @ManyToMany
     @JoinTable(
@@ -104,20 +113,23 @@ public class Event {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
-    public Boolean isIsRegistrationOpen() {
-        return this.isRegistrationOpen;
-    }
-    public Boolean getIsRegistrationOpen() {
-        return this.isRegistrationOpen;
-    }
-    public void setIsRegistrationOpen(Boolean isRegistrationOpen) {
-        this.isRegistrationOpen = isRegistrationOpen;
-    }
     public LocalDate getRegistrationClosingDate() {
         return this.registrationClosingDate;
     }
     public void setRegistrationClosingDate(LocalDate registrationClosingDate) {
         this.registrationClosingDate = registrationClosingDate;
+    }
+    public LocalDate getRegistrationOpeningDate() {
+        return this.registrationOpeningDate;
+    }
+    public void setRegistrationOpeningDate(LocalDate registrationOpeningDate) {
+        this.registrationOpeningDate = registrationOpeningDate;
+    }
+    public String getImage() {
+        return this.image;
+    }
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

@@ -24,5 +24,9 @@ public class EventService {
     public void save(Event event){
         eventRepository.save(event);
     }
+
+    public void deleteById(Integer id){
+        eventRepository.deleteById(id);
+    }
     
 }

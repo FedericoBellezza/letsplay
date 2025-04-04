@@ -19,9 +19,7 @@ public class Category {
 
     @NotBlank(message = "Inserisci un nome valido")
     private String name;
-
-    private String subcategory;
-
+    
     @OneToMany(mappedBy = "category")
     private List<Event> events;
 
@@ -38,12 +36,6 @@ public class Category {
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public String getSubcategory() {
-        return this.subcategory;
-    }
-    public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
     }
     public List<Event> getEvents() {
         return this.events;
