@@ -1,7 +1,6 @@
 package org.java.letsplay.service;
 
 import java.util.List;
-
 import org.java.letsplay.model.Event;
 import org.java.letsplay.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +27,4 @@ public class EventService {
     public void deleteById(Integer id){
         eventRepository.deleteById(id);
     }
-    
 }

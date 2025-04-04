@@ -10,6 +10,8 @@
   </head>
   <body>
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
+    <div th:replace="~{ fragments/fragments :: modal}"></div>
+
     <div class="flex items-center">
       <div class="w-1/3"></div>
       <h1 class="text-5xl text-center font-bold w-1/3">Categorie</h1>
@@ -43,7 +45,7 @@
                 >
                 <a
                   class="bg-red-500 text-white px-3 py-2 hover:bg-red-600 rounded-2xl"
-                  th:href="@{/events/{id}(id = *{id})}"
+                  th:onclick="openModal([[${category.name}]], [[${category.id}]], 'categories' )"
                   >Elimina</a
                 >
               </div>
@@ -52,5 +54,6 @@
         </tbody>
       </table>
     </div>
+    <script src="/js/Modal.js"></script>
   </body>
 </html>
