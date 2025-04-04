@@ -3,7 +3,6 @@ package org.java.letsplay.service;
 import java.util.List;
 
 import org.java.letsplay.model.Category;
-import org.java.letsplay.model.Event;
 import org.java.letsplay.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

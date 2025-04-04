@@ -1,7 +1,6 @@
 package org.java.letsplay.controller;
 
 import org.java.letsplay.model.Category;
-import org.java.letsplay.model.Event;
 import org.java.letsplay.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
