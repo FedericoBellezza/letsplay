@@ -1,56 +1,48 @@
 package org.java.letsplay.model;
 
-import java.util.List;
-
+import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "categories")
-public class Category {
-
+@Table(name = "roles")
+public class Role {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "Inserisci un nome valido")
+    @NotBlank(message = "Nome non valido")
     private String name;
-    
-    @OneToMany(mappedBy = "category")
+
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonBackReference
-    private List<Event> events;
-
-
-    // getter and setter
+    private Set<User> users;
+    
+    // getter e setters
     public Integer getId() {
-        return this.id;
+        return id;
     }
     public void setId(Integer id) {
         this.id = id;
     }
+    public Set<User> getUsers() {
+        return users;
+    }
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
     public String getName() {
-        return this.name;
+        return name;
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public List<Event> getEvents() {
-        return this.events;
-    }
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-
-    @Override
-    public String toString() {
-        return name;
     }
 }

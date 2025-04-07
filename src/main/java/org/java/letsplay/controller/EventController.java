@@ -1,7 +1,8 @@
 package org.java.letsplay.controller;
 
+
+import org.java.letsplay.model.Category;
 import org.java.letsplay.model.Event;
-import org.java.letsplay.repository.CategoryRepository;
 import org.java.letsplay.service.CategoryService;
 import org.java.letsplay.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,26 +10,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 @Controller
 @RequestMapping("/events")
 public class EventController {
-
-    private final CategoryService categoryService;
 
     @Autowired
     private EventService eventService;
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
 
-    EventController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
     
     @GetMapping
     public String index(Model model){
@@ -37,6 +35,22 @@ public class EventController {
         return "event/index";
     }
 
+    @GetMapping("/search")
+    public String advancedSearch(Model model, @RequestParam(required = false) String name,  @RequestParam(required = false) Integer category_id, @RequestParam(required = false) String address){
+
+        if (category_id != null) {
+            Category category = null;
+            category = categoryService.getById(category_id);
+            model.addAttribute("events", eventService.advancedSearch(name, category, address));
+        } else {
+            model.addAttribute("events", eventService.advancedSearchNoCategory(name, address));
+        }
+        
+        model.addAttribute("categories", categoryService.findAll());
+        
+        return "event/index";
+    }
+    
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model){
         model.addAttribute("event", eventService.getById(id));
@@ -46,7 +60,7 @@ public class EventController {
     @GetMapping("/create")
     public String create(Model model){
         model.addAttribute("event", new Event());
-        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("edit", false);
         return "event/create-or-edit";
     }

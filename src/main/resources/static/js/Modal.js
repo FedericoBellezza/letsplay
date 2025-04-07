@@ -6,7 +6,7 @@ function openModal(name, id, type) {
   if (type == "categories") {
     document.getElementById(
       "alertMessage"
-    ).textContent = `Se elimina questa categoria cancellerai anche tutti gli eventi di essa`;
+    ).textContent = `Se elimina questa categoria cancellerai anche tutti gli eventi collegati ad essa`;
   }
 }
 

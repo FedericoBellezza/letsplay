@@ -26,12 +26,14 @@
       </div>
 
       <p
+        id="filtersButton"
         th:onclick="openFilters()"
         class="text-center bg-blue-500 w-40 text-white rounded-lg px-3 py-1 mx-auto my-5 cursor-pointer hover:bg-blue-600"
       >
         Filtri di ricerca
       </p>
       <form
+        action="/events/search"
         id="searchForm"
         class="max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-lg space-y-6 hidden"
       >
@@ -54,13 +56,13 @@
           <!-- Categoria -->
           <div>
             <label
-              for="category"
+              for="category_id"
               class="block text-sm font-medium text-gray-700"
               >Categoria</label
             >
             <select
-              id="category"
-              name="category"
+              id="category_id"
+              name="category_id"
               class="mt-1 py-1 px-2 block w-full border-gray-300 border rounded-lg shadow-lg"
             >
               <option class="text-gray-500" value="">
@@ -75,34 +77,18 @@
               </option>
             </select>
           </div>
-
-          <!-- Indirizzo -->
-          <div>
-            <label for="address" class="block text-sm font-medium text-gray-700"
-              >Indirizzo</label
-            >
-            <input
-              type="text"
-              id="address"
-              name="address"
-              class="mt-1 py-1 px-2 block w-full rounded-lg shadow-lg border-gray-300 border"
-            />
-          </div>
-
-          <!-- Mese di Inizio -->
-          <div>
-            <label
-              for="startingOnMonth"
-              class="block text-sm font-medium text-gray-700"
-              >Mese di Inizio</label
-            >
-            <input
-              type="month"
-              id="startingOnMonth"
-              name="startingOnMonth"
-              class="mt-1 py-1 px-2 block w-full rounded-lg shadow-lg border-gray-300 border"
-            />
-          </div>
+        </div>
+        <!-- Indirizzo -->
+        <div>
+          <label for="address" class="block text-sm font-medium text-gray-700"
+            >Indirizzo</label
+          >
+          <input
+            type="text"
+            id="address"
+            name="address"
+            class="mt-1 py-1 px-2 block w-full rounded-lg shadow-lg border-gray-300 border"
+          />
         </div>
 
         <div class="flex justify-end gap-3">

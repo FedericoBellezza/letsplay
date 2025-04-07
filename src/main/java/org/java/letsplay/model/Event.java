@@ -62,7 +62,6 @@ public class Event {
     )
     private List<Team> teams;
 
-
     // getter and setter
     public Integer getId() {
         return this.id;

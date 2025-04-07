@@ -29,12 +29,18 @@
         <div class="flex gap-5 text-xl">
           <a class="hover:underline" href="/events">Eventi</a>
           <a class="hover:underline" href="/categories">Categorie</a>
-          <a class="hover:underline" href="/events">Squadre</a>
         </div>
       </div>
       <div class="flex items-center text-white gap-7 text-xl">
-        <span>Utente: <span class="font-bold">Federico</span></span>
-        <span>Permessi: <span class="font-bold">ADMIN</span></span>
+        <span
+          >Utente: <span sec:authentication="name" class="font-bold"></span
+        ></span>
+        <span
+          >Permessi:
+          <span sec:authentication="principal.authorities" class="font-bold"
+            >ADMIN</span
+          ></span
+        >
         <a
           href="/events"
           class="bg-red-700 hover:bg-red-800 rounded-lg px-3 py-2"
