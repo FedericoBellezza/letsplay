@@ -1,6 +1,5 @@
 package org.java.letsplay.controller;
 
-
 import org.java.letsplay.model.Category;
 import org.java.letsplay.model.Event;
 import org.java.letsplay.service.CategoryService;
@@ -27,7 +26,6 @@ public class EventController {
     @Autowired
     private CategoryService categoryService;
 
-    
     @GetMapping
     public String index(Model model){
         model.addAttribute("events", eventService.findAll());
@@ -87,11 +85,10 @@ public class EventController {
     }
 
     @PostMapping("/edit/{id}")
-    public String update(@Valid @ModelAttribute("event") Event formEvent, Model model, BindingResult bindingResult, @PathVariable Integer id) {
+    public String update(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult, Model model,  @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
-            model.addAttribute("event", eventService.getById(id));
             model.addAttribute("categories", categoryService.findAll());
             return "event/create-or-edit";
         }

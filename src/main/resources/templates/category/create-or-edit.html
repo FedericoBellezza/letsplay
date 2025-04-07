@@ -3,66 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Categories</title>
+    <title>Let's Play</title>
 
     <div th:replace="~{ fragments/fragments :: favicon}"></div>
     <div th:replace="~{ fragments/fragments :: tailwind}"></div>
   </head>
   <body th:object="${category}">
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
-    <!-- title -->
-    <h1
-      th:if="${edit}"
-      class="text-5xl text-slate-700 font-bold italic text-center pt-10 pb-10"
-    >
-      Modifica [[*{name}]]
-    </h1>
-    <h1
-      th:unless="${edit}"
-      class="text-5xl text-slate-700 font-bold italic text-center pt-10 pb-5"
-    >
-      Aggiungi categoria
-    </h1>
-    <form
-      th:action="${edit} ? @{/categories/edit/{id}(id = ${category.id})} : @{/categories/create}"
-      th:object="${category}"
-      method="post"
-      class="flex flex-col justify-center gap-3 w-2/3 mx-auto p-5"
-    >
-      <div class="flex gap-3 items-end">
-        <!-- name input -->
-        <div class="w-4/4">
-          <div class="flex flex-col">
-            <label for="name">Nome categoria</label>
-            <input
-              class="border ps-2 py-1 rounded"
-              type="text"
-              id="name"
-              th:field="*{name}"
-              th:errorClass="bg-red-200"
-            />
+    <div class="container py-10 mx-auto">
+      <!-- title -->
+      <h1
+        th:if="${edit}"
+        class="lg:text-5xl text-3xl text-slate-700 font-bold italic text-center"
+      >
+        Modifica [[*{name}]]
+      </h1>
+      <h1
+        th:unless="${edit}"
+        class="lg:text-5xl text-3xl text-slate-700 font-bold italic text-center"
+      >
+        Aggiungi categoria
+      </h1>
+      <form
+        th:action="${edit} ? @{/categories/edit/{id}(id = ${category.id})} : @{/categories/create}"
+        th:object="${category}"
+        method="post"
+        class="flex flex-col justify-center gap-3 w-2/3 mx-auto p-5 mt-5 w-full"
+      >
+        <div class="flex flex-col gap-3 items-end">
+          <!-- name input -->
+          <div class="w-4/4">
+            <div class="flex flex-col">
+              <label for="name">Nome categoria</label>
+              <input
+                class="border ps-2 py-1 rounded"
+                type="text"
+                id="name"
+                th:field="*{name}"
+                th:errorClass="bg-red-200"
+              />
+            </div>
+            <!-- validazione -->
+            <div th:if="${#fields.hasErrors('name')}">
+              <div
+                class="italic text-slate-500"
+                th:each="error : ${#fields.errors('name')}"
+                th:text="${error}"
+              ></div>
+            </div>
           </div>
-          <!-- validazione -->
-          <div th:if="${#fields.hasErrors('name')}">
-            <div
-              class="italic text-slate-500"
-              th:each="error : ${#fields.errors('name')}"
-              th:text="${error}"
-            ></div>
-          </div>
+
+          <a
+            href="/categories"
+            value="Annulla"
+            class="w-1/4 bg-red-500 text-white rounded-xl cursor-pointer text-center hover:bg-red-600 py-1 hidden lg:inline"
+            >Annulla
+          </a>
+          <input
+            type="submit"
+            th:value="${edit} ? Modifica : Aggiungi"
+            class="w-1/4 bg-blue-500 text-white rounded-xl cursor-pointer hover:bg-blue-600 py-1"
+          />
         </div>
-        <a
-          href="/categories"
-          value="Annulla"
-          class="w-1/4 bg-red-500 text-white rounded-xl cursor-pointer text-center hover:bg-red-600 py-1"
-          >Annulla
-        </a>
-        <input
-          type="submit"
-          th:value="${edit} ? Modifica : Aggiungi"
-          class="w-1/4 bg-blue-500 text-white rounded-xl cursor-pointer hover:bg-blue-600 py-1"
-        />
-      </div>
-    </form>
+      </form>
+    </div>
+
+    <script src="/js/script.js"></script>
   </body>
 </html>

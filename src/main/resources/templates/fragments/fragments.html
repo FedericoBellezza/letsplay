@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Let's Play</title>
 
     <!-- favicon -->
     <link
       th:fragment="favicon"
       rel="shortcut icon"
-      href="https://static.vecteezy.com/system/resources/previews/015/723/716/non_2x/pizza-hand-drawn-sketch-style-free-png.png"
+      href="/imgs/logos/logo green.png"
       type="image/x-icon"
     />
 
@@ -20,45 +20,120 @@
     ></script>
   </head>
   <body>
-    <nav
-      th:fragment="navbar"
-      class="w-full flex justify-between items-center bg-green-500 px-10 py-3 mb-10"
-    >
-      <div class="text-white">
-        <a href="/events" class="text-3xl font-bold italic me-10">Let'sPlay</a>
-        <div class="flex gap-5 text-xl">
-          <a class="hover:underline" href="/events">Eventi</a>
-          <a class="hover:underline" href="/categories">Categorie</a>
+    <nav th:fragment="navbar" class="max-w-screen w-full">
+      <div class="flex justify-between items-center bg-green-500 lg:px-10 py-3">
+        <!-- sm screen -->
+        <div class="w-full flex items-center justify-between px-5 lg:hidden">
+          <a href="/">
+            <div class="flex items-center text-white gap-3">
+              <img
+                src="/imgs/logos/logo white.png"
+                class="h-8"
+                alt="let's play logo"
+              />
+              <h2 class="font-bold italic text-2xl">Let's Play</h2>
+            </div>
+          </a>
+          <div
+            class="text-2xl"
+            id="openDropdownMenuButton"
+            th:onclick="openDropdownMenu()"
+          >
+            🍔
+          </div>
+          <div
+            id="closeDropdownMenuButton"
+            class="hidden text-2xl"
+            th:onclick="closeDropdownMenu()"
+          >
+            ✖
+          </div>
+        </div>
+
+        <!-- lg screen -->
+        <div class="flex gap-5 hidden lg:flex">
+          <a href="/">
+            <img src="/imgs/logos/logo white.png" class="h-15" alt="" />
+          </a>
+
+          <div class="text-white">
+            <a href="/events" class="text-3xl font-bold italic me-10"
+              >Let'sPlay</a
+            >
+            <div class="flex gap-5 text-xl">
+              <a class="hover:underline" href="/events">Eventi</a>
+              <a class="hover:underline" href="/categories">Categorie</a>
+            </div>
+          </div>
+        </div>
+        <!-- authentication -->
+        <div class="flex items-center text-white gap-7 text-xl hidden lg:flex">
+          <span
+            >Utente: <span sec:authentication="name" class="font-bold"></span
+          ></span>
+          <span
+            >Permessi:
+            <span
+              sec:authentication="principal.authorities"
+              class="font-bold"
+            ></span
+          ></span>
+          <a
+            href="/logout"
+            class="bg-white hover:bg-slate-100 text-slate-700 rounded-lg px-3 py-1"
+            >Logout</a
+          >
         </div>
       </div>
-      <div class="flex items-center text-white gap-7 text-xl">
-        <span
-          >Utente: <span sec:authentication="name" class="font-bold"></span
-        ></span>
-        <span
-          >Permessi:
-          <span sec:authentication="principal.authorities" class="font-bold"
-            >ADMIN</span
-          ></span
-        >
-        <a
-          href="/events"
-          class="bg-red-700 hover:bg-red-800 rounded-lg px-3 py-2"
-          >Logout</a
-        >
+
+      <!-- dropdown menu -->
+      <div class="bg-green-600 text-white absolute w-full lg:hidden">
+        <div id="dropdownMenu" class="hidden">
+          <!-- 1 row -->
+          <div class="flex justify-between items-center px-3 py-2 h-15">
+            <div>
+              <span
+                >Utente:
+                <span class="font-bold italic" sec:authentication="name"></span>
+              </span>
+              <span
+                class="font-bold"
+                sec:authentication="principal.authorities"
+              ></span>
+            </div>
+            <a
+              href="/logout"
+              class="bg-white text-slate-700 px-3 py-1 rounded-xl"
+              >Logout</a
+            >
+          </div>
+          <hr />
+          <!-- 2 row -->
+          <div class="flex justify-between items-center px-3 py-2 h-15">
+            <a class="text-xl italic font-bold" href="/events">Eventi</a>
+          </div>
+          <!-- 3 row -->
+          <div class="flex justify-between items-center px-3 py-2 h-15">
+            <a class="text-xl italic font-bold" href="/categories">Categorie</a>
+          </div>
+        </div>
       </div>
     </nav>
 
+    <!-- modal -->
     <div
       th:fragment="modal"
       class="hidden fixed bg-slate-800/75 justify-center items-center w-screen h-screen top-0 left-0"
       id="modalOverlay"
     >
-      <div class="w-5/10 mx-auto bg-white p-10 mt-[25vh] rounded-2xl z-5">
-        <h2 class="text-2xl">
+      <div
+        class="w-9/10 lg:w-5/10 mx-auto bg-white p-5 lg:p-10 mt-[25vh] rounded-2xl z-5"
+      >
+        <h2 class="text-md lg:text-2xl">
           Sei sicuro di voler eliminare:
           <span id="title" class="font-bold">Torneo delle Valli</span> ?
         </h2>
+        <hr class="my-3 lg:hidden" />
         <p id="alertMessage"></p>
 
         <form id="deleteForm" th:method="post" th:action="path" class="mt-5">

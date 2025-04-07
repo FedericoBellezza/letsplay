@@ -3,27 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[[${event.name}]]</title>
+    <title>Let's Play</title>
 
     <div th:replace="~{ fragments/fragments :: favicon}"></div>
     <div th:replace="~{ fragments/fragments :: tailwind}"></div>
   </head>
   <body th:object="${event}">
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
-    <div class="container mx-auto">
-      <div class="flex">
-        <section class="w-1/3 flex justify-end">
-          <img class="rounded-2xl h-180" th:src="@{*{image}}" alt="" />
+    <div class="container mx-auto px-2 py-5 lg:py-10">
+      <div class="flex flex-col lg:flex-row">
+        <section class="lg:w-1/3 w-full flex justify-end">
+          <img
+            class="rounded-2xl lg:h-180 w-full"
+            th:src="@{*{image}}"
+            alt=""
+          />
         </section>
         <section
-          class="w-2/3 px-5 gap-5 flex flex-col justify-start items-start"
+          class="lg:w-2/3 lg:px-5 px-2 gap-5 flex flex-col justify-start items-start"
         >
-          <div>
-            <h1 class="text-5xl text-center font-bold" th:text="*{name}"></h1>
-            <h2 class="text-3xl italic" th:text="*{category}"></h2>
+          <div class="w-full mt-5">
+            <h1
+              class="lg:text-5xl text-3xl text-center lg:text-start font-bold"
+              th:text="*{name}"
+            ></h1>
+            <h2
+              class="lg:text-3xl text-2xl text-center lg:text-start italic"
+              th:text="*{category}"
+            ></h2>
           </div>
           <p
-            class="text-lg"
+            class="lg:text-lg text-md"
             th:text="*{description}"
             style="white-space: pre-line"
           ></p>
@@ -60,5 +70,6 @@
         </section>
       </div>
     </div>
+    <script src="/js/script.js"></script>
   </body>
 </html>

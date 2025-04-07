@@ -3,25 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Events</title>
+    <title>Let's Play</title>
 
     <div th:replace="~{ fragments/fragments :: favicon}"></div>
     <div th:replace="~{ fragments/fragments :: tailwind}"></div>
   </head>
-  <body>
+  <body class="overflow-x-hidden">
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
     <div th:replace="~{ fragments/fragments :: modal}"></div>
 
-    <div class="container mx-auto">
+    <div class="container py-10 mx-auto">
       <div class="flex items-center">
         <div class="w-1/3"></div>
-        <h1 class="w-1/3 text-5xl text-slate-700 font-bold italic text-center">
+        <h1
+          class="w-1/3 lg:text-5xl text-3xl text-slate-700 font-bold italic text-center"
+        >
           Eventi
         </h1>
         <a
-          class="bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-2"
+          class="bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-2 hidden lg:block"
           href="/events/create"
           >Aggiungi evento</a
+        >
+        <a
+          class="lg:hidden bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-1 ms-5"
+          href="/events/create"
+          >+</a
         >
       </div>
 
@@ -32,6 +39,8 @@
       >
         Filtri di ricerca
       </p>
+
+      <!-- advanced search form -->
       <form
         action="/events/search"
         id="searchForm"
@@ -112,30 +121,30 @@
         <table class="border mx-auto text-center">
           <thead>
             <tr class="border">
-              <th class="px-5 py-1">id</th>
+              <th class="px-5 py-1 hidden lg:table-cell">id</th>
               <th class="px-5 py-1">Nome</th>
               <th class="px-5 py-1">Categoria</th>
-              <th class="px-5 py-1">Inizio</th>
-              <th class="px-5 py-1">Fine</th>
+              <th class="px-5 py-1 hidden lg:table-cell">Inizio</th>
+              <th class="px-5 py-1 hidden lg:table-cell">Fine</th>
               <th class="px-5 py-1"></th>
             </tr>
           </thead>
           <tbody>
             <tr th:each="event : ${events}" th:object="${event}">
-              <td class="px-3 py-1" th:text="*{id}"></td>
+              <td class="px-3 py-1 hidden lg:table-cell" th:text="*{id}"></td>
               <td class="px-3 py-1" th:text="*{name}"></td>
               <td class="px-3 py-1" th:text="*{category}"></td>
               <td
-                class="px-3 py-1"
+                class="px-3 py-1 hidden lg:table-cell"
                 th:text="${#temporals.format(event.startDate, 'dd-MM-yyyy')}"
               ></td>
               <td
-                class="px-3 py-1"
+                class="px-3 py-1 hidden lg:table-cell"
                 th:text="${#temporals.format(event.endDate, 'dd-MM-yyyy')}"
               ></td>
 
-              <td class="flex justify-around items-center px-3 py-1">
-                <div class="py-3">
+              <td class="flex justify-around items-center px-3 lg:py-1">
+                <div class="py-3 flex flex-col lg:flex-row gap-1">
                   <a
                     class="bg-blue-600 text-white px-3 py-2 hover:bg-blue-700 transition rounded-2xl"
                     th:href="@{/events/{id}(id = *{id})}"
@@ -158,7 +167,6 @@
         </table>
       </div>
     </div>
-    <script src="/js/Modal.js"></script>
-    <script src="/js/FilterSearch.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>
