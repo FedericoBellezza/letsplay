@@ -12,21 +12,19 @@
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
     <div th:replace="~{ fragments/fragments :: modal}"></div>
 
-    <div class="container py-10 mx-auto">
+    <div class="container py-10 mx-auto text-gray-700">
       <div class="flex items-center">
         <div class="w-1/3"></div>
-        <h1
-          class="w-1/3 lg:text-5xl text-3xl text-slate-700 font-bold italic text-center"
-        >
+        <h1 class="w-1/3 lg:text-5xl text-3xl font-bold italic text-center">
           Eventi
         </h1>
         <a
-          class="bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-2 hidden lg:block"
+          class="border border-green-300 text-gray-700 hover:bg-green-100 transition rounded-2xl px-4 py-1 hidden lg:block shadow-lg"
           href="/events/create"
           >Aggiungi evento</a
         >
         <a
-          class="lg:hidden bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-1 ms-5"
+          class="lg:hidden border border-green-300 text-gray-700 font-bold hover:bg-green-100 rounded-2xl px-3 py-1 ms-5"
           href="/events/create"
           >+</a
         >
@@ -35,7 +33,7 @@
       <p
         id="filtersButton"
         th:onclick="openFilters()"
-        class="text-center bg-blue-500 w-40 text-white rounded-lg px-3 py-1 mx-auto my-5 cursor-pointer hover:bg-blue-600"
+        class="text-center border border-gray-300 text-gray-700 w-40 shadow-lg rounded-2xl px-3 py-1 mx-auto my-5 cursor-pointer hover:bg-gray-100 transition"
       >
         Filtri di ricerca
       </p>
@@ -44,10 +42,8 @@
       <form
         action="/events/search"
         id="searchForm"
-        class="max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-lg space-y-6 hidden"
+        class="max-w-2xl mx-auto mt-10 rounded-2xl space-y-6 hidden"
       >
-        <h2 class="text-2xl font-semibold text-gray-800">Ricerca Avanzata</h2>
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Nome -->
           <div>
@@ -104,29 +100,41 @@
           <button
             th:onclick="closeFilters()"
             type="button"
-            class="px-6 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition cursor-pointer"
+            class="px-3 py-1 border border-red-300 text-gray-700 rounded-2xl shadow-lg hover:bg-red-100 transition cursor-pointer"
           >
             Annulla
           </button>
           <button
             type="submit"
-            class="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition cursor-pointer"
+            class="px-3 py-1 border border-gray-300 shadow-lg rounded-2xl hover:bg-gray-100 text-gray-700 transition cursor-pointer"
           >
             Cerca
           </button>
         </div>
       </form>
 
-      <div class="w-full my-10">
-        <table class="border mx-auto text-center">
+      <div class="w-full my-10 px-2">
+        <table class="border border-gray-300 mx-auto text-center">
           <thead>
-            <tr class="border">
-              <th class="px-5 py-1 hidden lg:table-cell">id</th>
-              <th class="px-5 py-1">Nome</th>
-              <th class="px-5 py-1">Categoria</th>
-              <th class="px-5 py-1 hidden lg:table-cell">Inizio</th>
-              <th class="px-5 py-1 hidden lg:table-cell">Fine</th>
-              <th class="px-5 py-1"></th>
+            <tr class="border border-gray-400">
+              <td
+                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell"
+              >
+                id
+              </td>
+              <td class="italic text-gray-500 px-2 lg:px-5 py-1">Nome</td>
+              <td class="italic text-gray-500 px-2 lg:px-5 py-1">Categoria</td>
+              <td
+                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell"
+              >
+                Inizio
+              </td>
+              <td
+                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell"
+              >
+                Fine
+              </td>
+              <td class="italic text-gray-500 px-2 lg:px-5 py-1"></td>
             </tr>
           </thead>
           <tbody>
@@ -136,28 +144,28 @@
               <td class="px-3 py-1" th:text="*{category}"></td>
               <td
                 class="px-3 py-1 hidden lg:table-cell"
-                th:text="${#temporals.format(event.startDate, 'dd-MM-yyyy')}"
+                th:text="${#temporals.format(event.startDate, 'dd-MM-yy')}"
               ></td>
               <td
                 class="px-3 py-1 hidden lg:table-cell"
-                th:text="${#temporals.format(event.endDate, 'dd-MM-yyyy')}"
+                th:text="${#temporals.format(event.endDate, 'dd-MM-yy')}"
               ></td>
 
               <td class="flex justify-around items-center px-3 lg:py-1">
                 <div class="py-3 flex flex-col lg:flex-row gap-1">
                   <a
-                    class="bg-blue-600 text-white px-3 py-2 hover:bg-blue-700 transition rounded-2xl"
+                    class="border border-gray-300 text-gray-700 px-3 py-1 hover:bg-gray-100 shadow-lg transition rounded-2xl"
                     th:href="@{/events/{id}(id = *{id})}"
                     >Dettagli</a
                   >
                   <a
-                    class="bg-green-600 text-white px-3 py-2 hover:bg-green-700 transition rounded-2xl"
+                    class="border-gray-300 border text-gray-700 px-3 py-1 hover:bg-gray-100 shadow-lg transition rounded-2xl"
                     th:href="@{/events/edit/{id}(id = *{id})}"
                     >Modifica</a
                   >
                   <a
                     th:onclick="openModal([[${event.name}]], [[${event.id}]], 'events' )"
-                    class="px-3 py-2 bg-red-600 text-white hover:bg-red-700 transition cursor-pointer rounded-2xl"
+                    class="px-3 py-1 border border-red-300 text-gray-700 hover:bg-red-100 transition cursor-pointer shadow-lg rounded-2xl"
                     th:text="Elimina"
                   ></a>
                 </div>

@@ -34,9 +34,11 @@
           <!-- name input -->
           <div class="grow">
             <div class="flex flex-col">
-              <label for="name">Nome</label>
+              <label class="block text-sm font-medium text-gray-700" for="name"
+                >Nome</label
+              >
               <input
-                class="border ps-2 py-1 rounded"
+                class="rounded-lg shadow-lg border-gray-300 border ps-2 py-1"
                 type="text"
                 id="name"
                 th:field="*{name}"
@@ -55,11 +57,15 @@
           <!-- category input -->
           <div class="grow mb-3">
             <div class="flex flex-col w-full">
-              <label for="category">Categoria</label>
+              <label
+                class="block text-sm font-medium text-gray-700"
+                for="category"
+                >Categoria</label
+              >
 
               <select
                 th:field="${event.category}"
-                class="border ps-2 py-1 rounded"
+                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 name="category"
                 id="category"
               >
@@ -82,7 +88,11 @@
         </div>
         <!-- textarea input -->
         <div class="flex flex-col mb-3">
-          <label for="description">Descrizione</label>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="description"
+            >Descrizione</label
+          >
           <textarea
             placeholder="⚽🏆 Sta per partire il Torneo delle Valli, l’imperdibile appuntamento amatoriale di calcio a 5 che per un mese intero accenderà la passione, la competizione e il divertimento tra amici e squadre locali!
 
@@ -98,7 +108,7 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
             th:field="*{description}"
             th:errorClass="bg-red-200"
             id="description"
-            class="border ps-2 py-1 rounded min-h-[300px]"
+            class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border min-h-[300px]"
           ></textarea>
           <!-- validazione -->
           <div th:if="${#fields.hasErrors('description')}">
@@ -115,9 +125,13 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
           <!-- startDate input -->
           <div class="grow">
             <div class="flex flex-col">
-              <label for="startDate">Data di inizio</label>
+              <label
+                class="block text-sm font-medium text-gray-700"
+                for="startDate"
+                >Data di inizio</label
+              >
               <input
-                class="border ps-2 py-1 rounded"
+                class="px-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="date"
                 id="startDate"
                 th:field="*{startDate}"
@@ -136,9 +150,13 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
           <!-- endDate input -->
           <div class="grow">
             <div class="flex flex-col w-full">
-              <label for="endDate">Data di fine</label>
+              <label
+                class="block text-sm font-medium text-gray-700"
+                for="endDate"
+                >Data di fine</label
+              >
               <input
-                class="border ps-2 py-1 rounded"
+                class="px-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="date"
                 id="endDate"
                 th:field="*{endDate}"
@@ -161,13 +179,18 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
           <!-- address input -->
           <div class="grow">
             <div class="flex flex-col">
-              <label for="address">Indirizzo</label>
+              <label
+                class="block text-sm font-medium text-gray-700"
+                for="address"
+                >Indirizzo</label
+              >
               <input
-                class="border ps-2 py-1 rounded"
+                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="text"
                 id="address"
                 th:field="*{address}"
                 th:errorClass="bg-red-200"
+                placeholder="Via Rossi 34, Torino"
               />
             </div>
             <!-- validazione -->
@@ -182,10 +205,12 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
           <!-- image input -->
           <div class="grow">
             <div class="flex flex-col">
-              <label for="image">Immagine di locandina</label>
+              <label class="block text-sm font-medium text-gray-700" for="image"
+                >Immagine di locandina</label
+              >
               <input
                 placeholder="Possibilmente verticale"
-                class="border ps-2 py-1 rounded"
+                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="text"
                 id="image"
                 th:field="*{image}"
@@ -207,11 +232,13 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
           <!-- registrationOpeningDate input -->
           <div class="grow">
             <div class="flex flex-col">
-              <label for="registrationOpeningDate"
+              <label
+                class="block text-sm font-medium text-gray-700"
+                for="registrationOpeningDate"
                 >Data di apertura iscrizioni</label
               >
               <input
-                class="border ps-2 py-1 rounded"
+                class="px-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 th:type="date"
                 id="registrationOpeningDate"
                 th:field="*{registrationOpeningDate}"
@@ -230,11 +257,13 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
           <!-- registrationClosingDate input -->
           <div class="grow">
             <div class="flex flex-col w-full">
-              <label for="registrationClosingDate"
+              <label
+                class="block text-sm font-medium text-gray-700"
+                for="registrationClosingDate"
                 >Data di chiusura iscrizioni</label
               >
               <input
-                class="border ps-2 py-1 rounded"
+                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="date"
                 id="registrationClosingDate"
                 th:field="*{registrationClosingDate}"
@@ -254,7 +283,7 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
 
         <!-- submit button -->
         <button
-          class="bg-blue-500 px-4 py-2 rounded-2xl text-white hover:bg-blue-600 cursor-pointer mt-3"
+          class="w-full border border-blue-300 px-3 py-1 rounded-2xl text-gray-700 hover:bg-blue-100 transition cursor-pointer mt-5 shadow-lg"
           type="submit"
         >
           Invia

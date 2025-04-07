@@ -11,7 +11,7 @@
   <body>
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
     <div th:replace="~{ fragments/fragments :: modal}"></div>
-    <div class="container py-10 mx-auto">
+    <div class="container py-10 mx-auto text-gray-700">
       <div class="flex items-center">
         <div class="w-1/3"></div>
         <h1
@@ -20,24 +20,24 @@
           Categorie
         </h1>
         <a
-          class="bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-2 hidden lg:block"
+          class="border border-green-300 hover:bg-green-100 rounded-2xl px-4 py-1 shadow-lg hidden lg:block"
           href="/categories/create"
-          >Aggiungi evento</a
+          >Aggiungi categoria</a
         >
         <a
-          class="lg:hidden bg-green-700 text-white hover:bg-green-800 rounded-lg px-3 py-1 ms-5"
+          class="lg:hidden border border-green-300 hover:bg-green-100 rounded-2xl px-3 py-1 shadow-lg ms-5 font-bold"
           href="/categories/create"
           >+</a
         >
       </div>
 
       <div class="w-full my-10 px-2">
-        <table class="border mx-auto text-center">
+        <table class="border border-gray-300 mx-auto text-center">
           <thead>
-            <tr class="border">
-              <th class="py-1">id</th>
-              <th class="py-1">Nome</th>
-              <th class="px-10 py-1"></th>
+            <tr class="border border-gray-400">
+              <td class="text-gray-500 italic py-1">id</td>
+              <td class="text-gray-500 italic py-1">Nome</td>
+              <td class="text-gray-500 italic px-10 py-1"></td>
             </tr>
           </thead>
           <tbody>
@@ -48,12 +48,12 @@
               <td class="px-3 py-1 flex justify-between items-center">
                 <div class="py-3 flex gap-1">
                   <a
-                    class="bg-green-500 text-white px-3 py-2 hover:bg-green-600 rounded-2xl"
+                    class="border border-gray-300 px-3 py-1 hover:bg-gray-100 rounded-2xl shadow-lg"
                     th:href="@{/categories/edit/{id}(id = *{id})}"
                     >Modifica</a
                   >
                   <a
-                    class="bg-red-500 text-white px-3 py-2 hover:bg-red-600 rounded-2xl"
+                    class="border border-red-300 px-3 py-1 hover:bg-red-100 cursor-pointer rounded-2xl shadow-lg"
                     th:onclick="openModal([[${category.name}]], [[${category.id}]], 'categories' )"
                     >Elimina</a
                   >
