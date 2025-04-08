@@ -34,3 +34,26 @@ function closeDropdownMenu() {
   document.getElementById("openDropdownMenuButton").classList.remove("hidden");
   document.getElementById("closeDropdownMenuButton").classList.add("hidden");
 }
+
+// sort event table
+function sortBy(id) {
+  let table = document.getElementById("eventsTable");
+  let rows = Array.from(table.rows).slice(1);
+  let isAscending =
+    table.rows[0].cells[id].getAttribute("data-sort-direction") === "asc";
+
+  rows.sort((rowA, rowB) => {
+    let cellA = rowA.cells[id].textContent.trim();
+    let cellB = rowB.cells[id].textContent.trim();
+
+    if (cellA < cellB) return isAscending ? -1 : 1;
+    if (cellA > cellB) return isAscending ? 1 : -1;
+    return 0;
+  });
+
+  rows.forEach((row) => table.appendChild(row));
+  table.rows[0].cells[id].setAttribute(
+    "data-sort-direction",
+    isAscending ? "desc" : "asc"
+  );
+}

@@ -32,11 +32,24 @@
       </div>
 
       <div class="w-full my-10 px-2">
-        <table class="border border-gray-300 mx-auto text-center">
+        <table
+          id="eventsTable"
+          class="border border-gray-300 mx-auto text-center"
+        >
           <thead>
             <tr class="border border-gray-400">
-              <td class="text-gray-500 italic py-1">id</td>
-              <td class="text-gray-500 italic py-1">Nome</td>
+              <td
+                th:onclick="sortBy(0)"
+                class="text-gray-500 italic py-1 cursor-pointer hover:underline"
+              >
+                id
+              </td>
+              <td
+                th:onclick="sortBy(1)"
+                class="text-gray-500 italic py-1 cursor-pointer hover:underline"
+              >
+                Nome
+              </td>
               <td class="text-gray-500 italic px-10 py-1"></td>
             </tr>
           </thead>

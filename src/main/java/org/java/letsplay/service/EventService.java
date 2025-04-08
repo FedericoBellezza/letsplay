@@ -2,11 +2,11 @@ package org.java.letsplay.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.java.letsplay.model.Category;
 import org.java.letsplay.model.Event;
 import org.java.letsplay.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +17,9 @@ public class EventService {
 
     public List<Event> findAll(){
         return eventRepository.findAll();
+    }
+    public List<Event> findAllSorted(String sort){
+        return eventRepository.findAll(Sort.by(sort));
     }
 
     public Optional<Event> findById(Integer id){
@@ -45,7 +48,7 @@ public class EventService {
     }
 
     public Event create(Event event){
-       return eventRepository.save(event);
+        return eventRepository.save(event);
     }
     
     public Event update(Event event){

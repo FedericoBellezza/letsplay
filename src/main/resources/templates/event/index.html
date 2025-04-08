@@ -114,23 +114,40 @@
       </form>
 
       <div class="w-full my-10 px-2">
-        <table class="border border-gray-300 mx-auto text-center">
+        <!-- table -->
+        <table
+          id="eventsTable"
+          class="border border-gray-300 mx-auto text-center"
+        >
           <thead>
             <tr class="border border-gray-400">
               <td
-                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell"
+                th:onclick="sortBy(0)"
+                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell cursor-pointer hover:underline"
               >
                 id
               </td>
-              <td class="italic text-gray-500 px-2 lg:px-5 py-1">Nome</td>
-              <td class="italic text-gray-500 px-2 lg:px-5 py-1">Categoria</td>
               <td
-                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell"
+                th:onclick="sortBy(1)"
+                class="italic text-gray-500 px-2 lg:px-5 py-1 cursor-pointer hover:underline"
+              >
+                Nome
+              </td>
+              <td
+                th:onclick="sortBy(2)"
+                class="italic text-gray-500 px-2 lg:px-5 py-1 cursor-pointer hover:underline"
+              >
+                Categoria
+              </td>
+              <td
+                th:onclick="sortBy(3)"
+                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell cursor-pointer hover:underline"
               >
                 Inizio
               </td>
               <td
-                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell"
+                th:onclick="sortBy(4)"
+                class="italic text-gray-500 px-2 lg:px-5 py-1 hidden lg:table-cell cursor-pointer hover:underline"
               >
                 Fine
               </td>

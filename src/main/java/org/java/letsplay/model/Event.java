@@ -29,9 +29,9 @@ public class Event {
     private String name;
 
     @Lob
+    @NotBlank(message = "Inserisci una descrizione valida")
     private String description;
 
-    
     private String image;
 
     @Lob

@@ -5,6 +5,7 @@ import org.java.letsplay.model.Event;
 import org.java.letsplay.service.CategoryService;
 import org.java.letsplay.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,13 @@ public class EventController {
         return "event/index";
     }
 
+    @GetMapping("/sort/{sort}")
+    public String indexSortBy(Model model, @PathVariable String sort) {
+        model.addAttribute("events", eventService.findAllSorted(sort));
+        model.addAttribute("categories", categoryService.findAll());
+        return "event/index";
+    }
+    
     @GetMapping("/search")
     public String advancedSearch(Model model, @RequestParam(required = false) String name,  @RequestParam(required = false) Integer category_id, @RequestParam(required = false) String address){
 
@@ -65,6 +73,10 @@ public class EventController {
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,  Model model){
+
+        if (formEvent.getImage() == "") {
+            formEvent.setImage("https://media.istockphoto.com/id/1147544807/it/vettoriale/la-commissione-per-la-immagine-di-anteprima-grafica-vettoriale.jpg?s=612x612&w=0&k=20&c=gsxHNYV71DzPuhyg-btvo-QhhTwWY0z4SGCSe44rvg4=");
+        }
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
@@ -102,4 +114,6 @@ public class EventController {
         eventService.deleteById(id);
         return "redirect:/events";
     }    
+
+
 }
