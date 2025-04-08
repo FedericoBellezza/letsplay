@@ -10,13 +10,13 @@
   </head>
   <body th:object="${category}">
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
-    <div class="container py-10 mx-auto">
+    <div class="container lg:px-50 py-10 mx-auto">
       <!-- title -->
       <h1
         th:if="${edit}"
         class="lg:text-5xl text-3xl text-slate-700 font-bold italic text-center"
       >
-        Modifica [[*{name}]]
+        Modifica: [[*{name}]]
       </h1>
       <h1
         th:unless="${edit}"
