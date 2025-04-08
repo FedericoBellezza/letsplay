@@ -110,7 +110,7 @@ public class EventController {
         }
 
         eventService.save(formEvent);        
-        return "redirect:/events";
+        return "redirect:/events/{id}";
     }
 
     @PostMapping("/delete/{id}")
