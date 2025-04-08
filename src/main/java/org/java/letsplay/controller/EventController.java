@@ -99,6 +99,10 @@ public class EventController {
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult, Model model,  @PathVariable Integer id) {
 
+        if (formEvent.getImage() == "") {
+            formEvent.setImage("https://media.istockphoto.com/id/1147544807/it/vettoriale/la-commissione-per-la-immagine-di-anteprima-grafica-vettoriale.jpg?s=612x612&w=0&k=20&c=gsxHNYV71DzPuhyg-btvo-QhhTwWY0z4SGCSe44rvg4=");
+        }
+        
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
             model.addAttribute("categories", categoryService.findAll());
