@@ -5,6 +5,7 @@ import java.util.List;
 import org.java.letsplay.model.Category;
 import org.java.letsplay.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +15,7 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public List<Category> findAll(){
-        return categoryRepository.findAll();
+        return categoryRepository.findAll(Sort.by("name"));
     }
 
     public Category getById(Integer id){

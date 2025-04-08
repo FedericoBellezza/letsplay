@@ -35,25 +35,45 @@ function closeDropdownMenu() {
   document.getElementById("closeDropdownMenuButton").classList.add("hidden");
 }
 
-// sort event table
+// table sorting
 function sortBy(id) {
   let table = document.getElementById("eventsTable");
   let rows = Array.from(table.rows).slice(1);
-  let isAscending =
-    table.rows[0].cells[id].getAttribute("data-sort-direction") === "asc";
+  let headerCell = table.rows[0].cells[id];
+  let isAscending = headerCell.getAttribute("data-sort-direction") === "asc";
 
   rows.sort((rowA, rowB) => {
     let cellA = rowA.cells[id].textContent.trim();
     let cellB = rowB.cells[id].textContent.trim();
 
-    if (cellA < cellB) return isAscending ? -1 : 1;
-    if (cellA > cellB) return isAscending ? 1 : -1;
-    return 0;
+    // Tenta di riconoscere numeri
+    let numA = parseFloat(cellA);
+    let numB = parseFloat(cellB);
+    let isNumber = !isNaN(numA) && !isNaN(numB);
+
+    // Tenta di riconoscere date ISO (YYYY-MM-DD)
+    let dateA = new Date(cellA);
+    let dateB = new Date(cellB);
+    let isValidDate =
+      !isNaN(dateA) &&
+      !isNaN(dateB) &&
+      /^\d{4}-\d{2}-\d{2}$/.test(cellA) &&
+      /^\d{4}-\d{2}-\d{2}$/.test(cellB);
+
+    if (isValidDate) {
+      return isAscending ? dateA - dateB : dateB - dateA;
+    } else if (isNumber) {
+      return isAscending ? numA - numB : numB - numA;
+    } else {
+      return isAscending
+        ? cellA.localeCompare(cellB)
+        : cellB.localeCompare(cellA);
+    }
   });
 
+  // Riappende le righe ordinate
   rows.forEach((row) => table.appendChild(row));
-  table.rows[0].cells[id].setAttribute(
-    "data-sort-direction",
-    isAscending ? "desc" : "asc"
-  );
+
+  // Aggiorna direzione sort
+  headerCell.setAttribute("data-sort-direction", isAscending ? "desc" : "asc");
 }
