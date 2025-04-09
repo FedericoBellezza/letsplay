@@ -28,10 +28,15 @@ public class Event {
     @Size(max = 20, message = "Il nome dell'evento può essere lungo massimo 20 caratteri")
     private String name;
 
+    private Integer price;
+
     @Lob
     @NotBlank(message = "Inserisci una descrizione valida")
     private String description;
 
+    @Lob
+    private String mainImage;
+    @Lob
     private String image;
 
     @Lob
@@ -41,18 +46,14 @@ public class Event {
     @NotNull(message = "Inserisci una data valida")
     private LocalDate startDate;
 
-    @NotNull(message = "Inserisci una data valida")
     private LocalDate endDate;
+    private LocalDate registrationClosingDate;
+    private LocalDate registrationOpeningDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @NotNull(message = "Inserisci una data valida")
-    private LocalDate registrationClosingDate;
-
-    @NotNull(message = "Inserisci una data valida")
-    private LocalDate registrationOpeningDate;
     
     @ManyToMany
     @JoinTable(
@@ -129,5 +130,23 @@ public class Event {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public Integer getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+
+    public String getMainImage() {
+        return this.mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
 
 }

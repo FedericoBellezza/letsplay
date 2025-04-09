@@ -10,7 +10,7 @@
   </head>
   <body th:object="${event}">
     <div th:replace="~{ fragments/fragments :: navbar}"></div>
-    <div class="container mx-auto overflow-hidden">
+    <div class="container mx-auto overflow-hidden my-10">
       <!-- title -->
       <h1
         th:if="${edit}"
@@ -24,6 +24,11 @@
       >
         Aggiungi evento
       </h1>
+      <p class="text-center w-1/2 mx-auto text-gray-400">
+        Per l'immagine principale è consigliata un'immagine quadrata che
+        rappresenti l'evento, mentre per l'immagine di locandina si consiglia
+        un'immagine verticale con su scritti i dettagli utili ai partecipanti.
+      </p>
       <form
         th:action="${edit} ? @{/events/edit/{id}(id = ${event.id})} : @{/events/create}"
         th:object="${event}"
@@ -121,7 +126,9 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
         </div>
 
         <!-- start and end date container -->
-        <div class="flex flex-col lg:flex-row gap-3 mb-3">
+        <div
+          class="flex flex-col lg:flex-row justify-between items-end gap-3 mb-3"
+        >
           <!-- startDate input -->
           <div class="grow">
             <div class="flex flex-col">
@@ -147,14 +154,22 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
               ></div>
             </div>
           </div>
+          <button
+            type="button"
+            id="endDateButton"
+            class="px-3 py-1 h-10 border border-gray-300 shadow-lg rounded-2xl hover:bg-gray-100 text-gray-700 transition cursor-pointer"
+            th:onclick="displayEndDate()"
+          >
+            Multidata
+          </button>
           <!-- endDate input -->
-          <div class="grow">
+          <div id="endDateInput" class="grow hidden">
             <div class="flex flex-col w-full">
               <label
                 class="block text-sm font-medium text-gray-700"
                 for="endDate"
-                >Data di fine</label
-              >
+                >Data di fine
+              </label>
               <input
                 class="px-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="date"
@@ -174,30 +189,30 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
           </div>
         </div>
 
-        <!-- address and image container -->
+        <!-- main image and locandina container -->
         <div class="flex flex-col lg:flex-row gap-3 mb-3">
-          <!-- address input -->
+          <!-- mainImage input -->
           <div class="grow">
             <div class="flex flex-col">
               <label
                 class="block text-sm font-medium text-gray-700"
-                for="address"
-                >Indirizzo</label
+                for="mainImage"
+                >Immagine principale</label
               >
               <input
+                placeholder="Possibilmente quadrata"
                 class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="text"
-                id="address"
-                th:field="*{address}"
+                id="mainImage"
+                th:field="*{mainImage}"
                 th:errorClass="bg-red-200"
-                placeholder="Via Rossi 34, Torino"
               />
             </div>
             <!-- validazione -->
-            <div th:if="${#fields.hasErrors('address')}">
+            <div th:if="${#fields.hasErrors('mainImage')}">
               <div
                 class="italic text-slate-500"
-                th:each="error : ${#fields.errors('address')}"
+                th:each="error : ${#fields.errors('mainImage')}"
                 th:text="${error}"
               ></div>
             </div>
@@ -227,8 +242,75 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
             </div>
           </div>
         </div>
+
+        <!-- address and price container -->
+        <div class="flex flex-col lg:flex-row gap-3 mb-3">
+          <!-- address input -->
+          <div class="grow">
+            <div class="flex flex-col">
+              <label
+                class="block text-sm font-medium text-gray-700"
+                for="address"
+                >Indirizzo</label
+              >
+              <input
+                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
+                type="text"
+                id="address"
+                th:field="*{address}"
+                th:errorClass="bg-red-200"
+                placeholder="Via Rossi 34, Torino"
+              />
+            </div>
+            <!-- validazione -->
+            <div th:if="${#fields.hasErrors('address')}">
+              <div
+                class="italic text-slate-500"
+                th:each="error : ${#fields.errors('address')}"
+                th:text="${error}"
+              ></div>
+            </div>
+          </div>
+
+          <!-- price input -->
+          <div class="grow">
+            <div class="flex flex-col">
+              <label class="block text-sm font-medium text-gray-700" for="price"
+                >Prezzo</label
+              >
+              <input
+                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
+                type="text"
+                id="price"
+                th:field="*{price}"
+                th:errorClass="bg-red-200"
+                placeholder="10,50"
+              />
+            </div>
+            <!-- validazione -->
+            <div th:if="${#fields.hasErrors('price')}">
+              <div
+                class="italic text-slate-500"
+                th:each="error : ${#fields.errors('price')}"
+                th:text="${error}"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          th:onclick="displayRegistrationDate()"
+          type="button"
+          id="registrationDateButton"
+          class="px-3 py-1 h-10 border border-gray-300 shadow-lg rounded-2xl hover:bg-gray-100 text-gray-700 transition cursor-pointer"
+        >
+          Bisogna iscriversi per questo evento?
+        </button>
         <!-- open and close registration date container -->
-        <div class="flex flex-col lg:flex-row gap-3">
+        <div
+          id="registrationDateContainer"
+          class="flex flex-col lg:flex-row gap-3 hidden"
+        >
           <!-- registrationOpeningDate input -->
           <div class="grow">
             <div class="flex flex-col">
@@ -263,7 +345,7 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
                 >Data di chiusura iscrizioni</label
               >
               <input
-                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
+                class="px-2 py-1 rounded-lg shadow-lg border-gray-300 border"
                 type="date"
                 id="registrationClosingDate"
                 th:field="*{registrationClosingDate}"

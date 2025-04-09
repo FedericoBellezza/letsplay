@@ -77,3 +77,17 @@ function sortBy(id) {
   // Aggiorna direzione sort
   headerCell.setAttribute("data-sort-direction", isAscending ? "desc" : "asc");
 }
+
+// display event create or edit form
+function displayEndDate() {
+  document.getElementById("endDateInput").classList.remove("hidden");
+  document.getElementById("endDateButton").classList.add("hidden");
+}
+
+// display registration dates
+function displayRegistrationDate() {
+  document.getElementById("registrationDateButton").classList.add("hidden");
+  document
+    .getElementById("registrationDateContainer")
+    .classList.remove("hidden");
+}
