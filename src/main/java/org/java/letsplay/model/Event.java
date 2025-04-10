@@ -25,7 +25,7 @@ public class Event {
     private Integer id;
 
     @NotBlank(message = "Inserisci un nome valido")
-    @Size(max = 20, message = "Il nome dell'evento può essere lungo massimo 20 caratteri")
+    @Size(max = 25, message = "Il nome dell'evento può essere lungo massimo 20 caratteri")
     private String name;
 
     private Integer price;

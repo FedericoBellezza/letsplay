@@ -12,6 +12,7 @@ public class HomepageController {
     public String redirect() {
         return "redirect:/events";
     }
+
     
 
     

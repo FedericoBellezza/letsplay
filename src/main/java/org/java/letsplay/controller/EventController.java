@@ -24,24 +24,34 @@ public class EventController {
 
     // random mainImage on event creation
     private static final String[] RANDOM_IMGS_CALCIO = {
-        "https://www.lineaedp.it/files/2021/05/calcio.jpeg",
-        "https://www.cartadiroma.org/wp-content/uploads/2014/08/pallone-calcio-1-1.jpg",
-        "https://cdn.skuola.net/news_foto/image-grabber/image-64621625e9ba2.jpg"
+        "https://i.postimg.cc/VL230t0X/calcio1.png", "https://i.postimg.cc/MGSNd8DT/calcio2.png", "https://i.postimg.cc/K8LCPYtw/calcio3.png", "https://i.postimg.cc/cJBjz59c/calcio4.png", "https://i.postimg.cc/9MXSHtsH/calcio5.png", "https://i.postimg.cc/LXyW9gMY/calcio6.png"
+
     };
     private static final String[] RANDOM_IMGS_PALLAVOLO = {
-        "https://buonenotizie.it/wp-content/uploads/2024/06/pallavolo-femminile.jpg",
-        "https://www.bologna24ore.it/wp-content/uploads/sites/7/2023/08/Pallavolo-696x392.jpg",
-        "https://adastravolley.com/wp-content/uploads/2023/05/Palla-regolamentare-nella-pallavolo.jpg"
+        "https://i.postimg.cc/vBRrWQLq/pallavolo2.png", "https://i.postimg.cc/V6jjg3KY/pallavolo3.png", "https://i.postimg.cc/9QMY2gQp/pallavolo4.png", "https://i.postimg.cc/pL6YLQ9t/pallavolo5.png", "https://i.postimg.cc/Gtdv5qfv/pallavolo6.png", "https://i.postimg.cc/nr2qbq8g/pallavolo7.png"
     };
     private static final String[] RANDOM_IMGS_CARTE = {
-        "https://www.itismagazine.it/files/2022/05/giochi-di-carte-.jpeg",
-        "https://www.ipersoap.com/wp-content/uploads/2021/09/Cover-Carte.png.webp",
-        "https://www.unitretrofarello.it/wp-content/uploads/2024/08/Burraco.jpg"
+        "https://i.postimg.cc/jqDWsVHC/carte1.png", "https://i.postimg.cc/xjBX8s55/carte2.png", "https://i.postimg.cc/hPxfd93B/carte3.png", "https://i.postimg.cc/BtWf3Px5/carte4.png", "https://i.postimg.cc/Bn0tcXd1/carte5.png", "https://i.postimg.cc/BvZ6kRZS/carte6.png", "https://i.postimg.cc/qvxqmpTD/carte7.png", "https://i.postimg.cc/Bvh60Ntx/carte8.png"
     };
     private static final String[] RANDOM_IMGS_SAGRA_ALIMENTARE = {
-        "https://blog.academia.tv/wp-content/uploads/2023/10/variation-homemade-baked-pastry-cuisine-shop-1-min.jpg",
-        "https://www.turismovacanze.net/wp-content/uploads/2019/01/sagra.jpg",
-        "https://wips.plug.it/cips/initalia.virgilio.it/cms/2016/07/sagre-italiane.jpg"
+"https://i.postimg.cc/zv72tLxX/sagra-alimentare1.png",
+"https://i.postimg.cc/CMs2LtwT/sagra-alimentare2.png",
+"https://i.postimg.cc/Yq2s43S4/sagra-alimentare3.png",
+"https://i.postimg.cc/rFhY5rdf/sagra-alimentare4.png",
+"https://i.postimg.cc/DwHjM3Ps/sagra-alimentare5.png",
+"https://i.postimg.cc/tTHr9df4/sagra-alimentare6.png",
+"https://i.postimg.cc/3wGSMftq/sagra-alimentare7.png",
+"https://i.postimg.cc/Ss7gR2F7/sagra-alimentare8.png",
+"https://i.postimg.cc/WzNXkNsR/sagra-alimentare9.png"
+    };
+    private static final String[] RANDOM_IMGS_CONCERTO = {
+"https://i.postimg.cc/GprjT3Lc/spettacolo1.png",
+"https://i.postimg.cc/pdZJfNrK/spettacolo2.png",
+"https://i.postimg.cc/6pC0Q4Nj/spettacolo3.png",
+"https://i.postimg.cc/k4gFwjRz/spettacolo4.png",
+"https://i.postimg.cc/VvS9PdRF/spettacolo5.png",
+"https://i.postimg.cc/wxPccQq4/spettacolo6.png",
+"https://i.postimg.cc/4yr6fs2R/spettacolo7.png"
     };
     public static String chooseRandomImage(Integer categoryId) {
         Random random = new Random();
@@ -58,6 +68,9 @@ public class EventController {
         } else if (categoryId == 8 ) {
             int index = random.nextInt(RANDOM_IMGS_SAGRA_ALIMENTARE.length);
             return RANDOM_IMGS_SAGRA_ALIMENTARE[index];
+        } else if (categoryId == 9 ) {
+            int index = random.nextInt(RANDOM_IMGS_CONCERTO.length);
+            return RANDOM_IMGS_CONCERTO[index];
         } 
         return  "https://i.postimg.cc/dtJS98Kr/hero-Image.png";
     }

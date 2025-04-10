@@ -1,6 +1,5 @@
 package org.java.letsplay.repository;
 
-
 import java.util.List;
 import org.java.letsplay.model.Category;
 import org.java.letsplay.model.Event;

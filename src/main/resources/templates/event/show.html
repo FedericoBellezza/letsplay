@@ -21,11 +21,6 @@
               th:src="@{*{image}}"
               alt=""
             />
-            <img
-              class="rounded-2xl object-cover lg:h-180 w-full aspect-square hidden lg:block"
-              th:src="@{*{mainImage}}"
-              alt=""
-            />
           </div>
         </section>
         <section
@@ -53,19 +48,25 @@
                 th:text="*{#temporals.format(startDate, 'dd / MM / yyyy')}"
               ></span>
             </li>
-            <li class="list-disc list-inside">
+            <li th:if="${endDate}" class="list-disc list-inside">
               <span class="font-bold">Fine evento: </span
               ><span
                 th:text="*{#temporals.format(endDate, 'dd / MM / yyyy')}"
               ></span>
             </li>
-            <li class="list-disc list-inside">
+            <li
+              th:if="${registrationOpeningDate}"
+              class="list-disc list-inside"
+            >
               <span class="font-bold">Apertura iscrizioni: </span
               ><span
                 th:text="*{#temporals.format(registrationOpeningDate, 'dd / MM / yyyy')}"
               ></span>
             </li>
-            <li class="list-disc list-inside">
+            <li
+              th:if="${registrationClosingDate}"
+              class="list-disc list-inside"
+            >
               <span class="font-bold">Chiusura iscrizioni: </span
               ><span
                 th:text="*{#temporals.format(registrationClosingDate, 'dd / MM / yyyy')}"
@@ -75,13 +76,14 @@
               <span class="font-bold">Indirizzo: </span
               ><span th:text="*{address}"></span>
             </li>
+            <li class="list-disc list-inside">
+              <span class="font-bold">Prezzo: </span
+              ><span
+                th:text="*{price == null || price == 0 ? 'Gratuito' : price + ' €'}"
+              ></span>
+            </li>
           </ul>
         </section>
-        <img
-          class="rounded-2xl object-cover lg:h-180 w-full aspect-square my-10 lg:hidden"
-          th:src="@{*{mainImage}}"
-          alt=""
-        />
       </div>
       <hr class="my-10" />
       <div class="flex gap-5 justify-end items-center">

@@ -6,6 +6,8 @@ import org.java.letsplay.model.Category;
 import org.java.letsplay.model.Event;
 import org.java.letsplay.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class EventService {
     }
     public List<Event> findAllSorted(String sort){
         return eventRepository.findAll(Sort.by(sort));
+    }
+    public List<Event> getFirst4Events() {
+        PageRequest pageRequest = PageRequest.of(0, 4);
+        Page<Event> events = eventRepository.findAll(pageRequest);
+        return events.getContent();
     }
 
     public Optional<Event> findById(Integer id){

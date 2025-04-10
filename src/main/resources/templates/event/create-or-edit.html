@@ -191,32 +191,6 @@ Ogni partita è l’occasione perfetta per mettersi alla prova, stringere nuove 
 
         <!-- main image and locandina container -->
         <div class="flex flex-col lg:flex-row gap-3 mb-3">
-          <!-- mainImage input -->
-          <div class="grow">
-            <div class="flex flex-col">
-              <label
-                class="block text-sm font-medium text-gray-700"
-                for="mainImage"
-                >Immagine principale</label
-              >
-              <input
-                placeholder="Possibilmente quadrata"
-                class="ps-2 py-1 rounded-lg shadow-lg border-gray-300 border"
-                type="text"
-                id="mainImage"
-                th:field="*{mainImage}"
-                th:errorClass="bg-red-200"
-              />
-            </div>
-            <!-- validazione -->
-            <div th:if="${#fields.hasErrors('mainImage')}">
-              <div
-                class="italic text-slate-500"
-                th:each="error : ${#fields.errors('mainImage')}"
-                th:text="${error}"
-              ></div>
-            </div>
-          </div>
           <!-- image input -->
           <div class="grow">
             <div class="flex flex-col">

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @CrossOrigin(origins = "*") // oppure "*", se sei in dev
 @RestController
@@ -32,6 +34,12 @@ public class RestEventController {
         return eventService.findAll();
     }
     
+    @GetMapping("/limit4")
+    public List<Event> getFirst4Events() {
+        return eventService.getFirst4Events();
+    }
+    
+
     @GetMapping("/{id}")
     public ResponseEntity<Event> show(@PathVariable Integer id, Model model){
 
