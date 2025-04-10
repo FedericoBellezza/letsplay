@@ -115,9 +115,7 @@ public class EventController {
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,  Model model){
 
-        if (formEvent.getMainImage() == "") {
-            formEvent.setMainImage(chooseRandomImage());
-        }
+        formEvent.setMainImage(chooseRandomImage(formEvent.getCategory().getId()));
 
         if (formEvent.getImage() == "") {
             formEvent.setImage("https://media.istockphoto.com/id/1147544807/it/vettoriale/la-commissione-per-la-immagine-di-anteprima-grafica-vettoriale.jpg?s=612x612&w=0&k=20&c=gsxHNYV71DzPuhyg-btvo-QhhTwWY0z4SGCSe44rvg4=");
