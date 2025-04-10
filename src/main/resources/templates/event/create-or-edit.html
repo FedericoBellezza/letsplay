@@ -24,11 +24,7 @@
       >
         Aggiungi evento
       </h1>
-      <p class="text-center w-1/2 mx-auto text-gray-400">
-        Per l'immagine principale è consigliata un'immagine quadrata che
-        rappresenti l'evento, mentre per l'immagine di locandina si consiglia
-        un'immagine verticale con su scritti i dettagli utili ai partecipanti.
-      </p>
+
       <form
         th:action="${edit} ? @{/events/edit/{id}(id = ${event.id})} : @{/events/create}"
         th:object="${event}"

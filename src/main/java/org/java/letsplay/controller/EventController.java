@@ -24,14 +24,31 @@ public class EventController {
 
     // random mainImage on event creation
     private static final String[] RANDOM_IMGS_CALCIO = {
-        "https://i.postimg.cc/VL230t0X/calcio1.png", "https://i.postimg.cc/MGSNd8DT/calcio2.png", "https://i.postimg.cc/K8LCPYtw/calcio3.png", "https://i.postimg.cc/cJBjz59c/calcio4.png", "https://i.postimg.cc/9MXSHtsH/calcio5.png", "https://i.postimg.cc/LXyW9gMY/calcio6.png"
+        "https://i.postimg.cc/VL230t0X/calcio1.png", 
+        "https://i.postimg.cc/MGSNd8DT/calcio2.png", 
+        "https://i.postimg.cc/K8LCPYtw/calcio3.png", 
+        "https://i.postimg.cc/cJBjz59c/calcio4.png", 
+        "https://i.postimg.cc/9MXSHtsH/calcio5.png", 
+        "https://i.postimg.cc/LXyW9gMY/calcio6.png"
 
     };
     private static final String[] RANDOM_IMGS_PALLAVOLO = {
-        "https://i.postimg.cc/vBRrWQLq/pallavolo2.png", "https://i.postimg.cc/V6jjg3KY/pallavolo3.png", "https://i.postimg.cc/9QMY2gQp/pallavolo4.png", "https://i.postimg.cc/pL6YLQ9t/pallavolo5.png", "https://i.postimg.cc/Gtdv5qfv/pallavolo6.png", "https://i.postimg.cc/nr2qbq8g/pallavolo7.png"
+        "https://i.postimg.cc/vBRrWQLq/pallavolo2.png", 
+        "https://i.postimg.cc/V6jjg3KY/pallavolo3.png", 
+        "https://i.postimg.cc/9QMY2gQp/pallavolo4.png", 
+        "https://i.postimg.cc/pL6YLQ9t/pallavolo5.png", 
+        "https://i.postimg.cc/Gtdv5qfv/pallavolo6.png", 
+        "https://i.postimg.cc/nr2qbq8g/pallavolo7.png"
     };
     private static final String[] RANDOM_IMGS_CARTE = {
-        "https://i.postimg.cc/jqDWsVHC/carte1.png", "https://i.postimg.cc/xjBX8s55/carte2.png", "https://i.postimg.cc/hPxfd93B/carte3.png", "https://i.postimg.cc/BtWf3Px5/carte4.png", "https://i.postimg.cc/Bn0tcXd1/carte5.png", "https://i.postimg.cc/BvZ6kRZS/carte6.png", "https://i.postimg.cc/qvxqmpTD/carte7.png", "https://i.postimg.cc/Bvh60Ntx/carte8.png"
+        "https://i.postimg.cc/jqDWsVHC/carte1.png", 
+        "https://i.postimg.cc/xjBX8s55/carte2.png", 
+        "https://i.postimg.cc/hPxfd93B/carte3.png", 
+        "https://i.postimg.cc/BtWf3Px5/carte4.png", 
+        "https://i.postimg.cc/Bn0tcXd1/carte5.png", 
+        "https://i.postimg.cc/BvZ6kRZS/carte6.png",
+        "https://i.postimg.cc/qvxqmpTD/carte7.png", 
+        "https://i.postimg.cc/Bvh60Ntx/carte8.png"
     };
     private static final String[] RANDOM_IMGS_SAGRA_ALIMENTARE = {
 "https://i.postimg.cc/zv72tLxX/sagra-alimentare1.png",
