@@ -11,13 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @CrossOrigin(origins = "*") // oppure "*", se sei in dev
@@ -25,8 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/api/events")
 public class RestEventController {
 
+
+
     @Autowired
     private EventService eventService;
+
+
 
     // routes    
     @GetMapping
@@ -37,6 +39,11 @@ public class RestEventController {
     @GetMapping("/limit4")
     public List<Event> getFirst4Events() {
         return eventService.getFirst4Events();
+    }
+
+    @GetMapping("/sort/{sort}")
+    public List<Event> indexSortBy(@PathVariable String sort) {
+        return eventService.findAllSorted(sort);
     }
     
 

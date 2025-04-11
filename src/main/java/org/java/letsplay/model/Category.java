@@ -1,9 +1,8 @@
 package org.java.letsplay.model;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +26,9 @@ public class Category {
     @JsonBackReference
     private List<Event> events;
 
+    @OneToMany(mappedBy = "category")
+    private List<Image> images = new ArrayList<Image>();
+
 
     // getter and setter
     public Integer getId() {
@@ -47,8 +49,15 @@ public class Category {
     public void setEvents(List<Event> events) {
         this.events = events;
     }
-
-
+    public List<Image> getImages() {
+        return this.images;
+    }
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+public Image getImageByIndex(int id){
+    return images.get(id);
+}
     @Override
     public String toString() {
         return name;

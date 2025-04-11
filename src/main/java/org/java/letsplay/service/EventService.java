@@ -42,6 +42,7 @@ public class EventService {
     }
 
     public void deleteById(Integer id){
+
         eventRepository.deleteById(id);
     }
 
@@ -60,6 +61,10 @@ public class EventService {
     
     public Event update(Event event){
        return eventRepository.save(event);
+    }
+
+    public void deleteAll(List<Event> events){
+        eventRepository.deleteAll(events);
     }
 
 }

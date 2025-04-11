@@ -91,3 +91,41 @@ function displayRegistrationDate() {
     .getElementById("registrationDateContainer")
     .classList.remove("hidden");
 }
+
+// category form
+function addImageUrl() {
+  const container = document.getElementById("imageUrls");
+  const nextIndex = document.querySelectorAll(
+    '#imageUrls input[type="text"]'
+  ).length;
+
+  const div = document.createElement("div");
+  div.className = "image-url flex justify-between items-baseline gap-3";
+  div.innerHTML = `
+    <div class="flex flex-col mt-5">
+      <input class="rounded-lg shadow-lg border-gray-300 border ps-2 py-1" 
+             type="text" 
+             name="imageUrls[${nextIndex}]" 
+             placeholder="Inserisci URL immagine">
+    </div>
+    <button class="w-full border border-red-300 px-3 py-1 rounded-2xl text-gray-700 hover:bg-red-100 transition cursor-pointer mt-5 shadow-lg" 
+            type="button" 
+            onclick="removeImageUrl(this)">
+      Rimuovi
+    </button>
+  `;
+  container.appendChild(div);
+}
+function removeImageUrl(button) {
+  const container = document.getElementById("imageUrls");
+  button.parentElement.remove();
+  updateInputIndexes();
+
+  // Funzione per riaggiornare tutti gli indici
+  function updateInputIndexes() {
+    const inputs = document.querySelectorAll('#imageUrls input[type="text"]');
+    inputs.forEach((input, index) => {
+      input.name = `imageUrls[${index}]`;
+    });
+  }
+}

@@ -1,15 +1,12 @@
 package org.java.letsplay.model;
 
 import java.time.LocalDate;
-import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -54,14 +51,6 @@ public class Event {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    
-    @ManyToMany
-    @JoinTable(
-        name = "event_team",
-        joinColumns = @JoinColumn(name = "event_id"),
-        inverseJoinColumns = @JoinColumn(name = "team_id")
-    )
-    private List<Team> teams;
 
     // getter and setter
     public Integer getId() {
@@ -106,12 +95,7 @@ public class Event {
     public void setCategory(Category category) {
         this.category = category;
     }
-    public List<Team> getTeams() {
-        return this.teams;
-    }
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
-    }
+
     public LocalDate getRegistrationClosingDate() {
         return this.registrationClosingDate;
     }
