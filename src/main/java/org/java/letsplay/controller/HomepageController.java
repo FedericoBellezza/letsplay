@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping
 public class HomepageController {
 
+    // routes
     @GetMapping
     public String redirect() {
         return "redirect:/events";
     }
 
-    
-
-    
 }

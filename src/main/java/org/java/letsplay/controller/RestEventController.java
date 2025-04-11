@@ -17,17 +17,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-@CrossOrigin(origins = "*") // oppure "*", se sei in dev
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/events")
 public class RestEventController {
 
 
-
+    // services
     @Autowired
     private EventService eventService;
-
 
 
     // routes    
@@ -35,18 +33,14 @@ public class RestEventController {
     public List<Event> index(Model model){
         return eventService.findAll();
     }
-    
     @GetMapping("/limit4")
     public List<Event> getFirst4Events() {
         return eventService.getFirst4Events();
     }
-
     @GetMapping("/sort/{sort}")
     public List<Event> indexSortBy(@PathVariable String sort) {
         return eventService.findAllSorted(sort);
     }
-    
-
     @GetMapping("/{id}")
     public ResponseEntity<Event> show(@PathVariable Integer id, Model model){
 
@@ -58,12 +52,10 @@ public class RestEventController {
 
         return new ResponseEntity<Event>(eventToFind.get(), HttpStatus.OK);
     }
-
     @PostMapping("/create")
     public ResponseEntity<Event> store(@Valid @RequestBody Event event){
         return new ResponseEntity<Event>(eventService.create(event), HttpStatus.OK);
     }
-
     @PostMapping("/update/{id}")
     public ResponseEntity<Event> update(@Valid @RequestBody Event event, @PathVariable Integer id) {
 
@@ -76,7 +68,6 @@ public class RestEventController {
         eventService.update(event);        
         return new ResponseEntity<Event>(eventToFind.get(), HttpStatus.OK);
     }
-
     @PostMapping("/delete/{id}")
     public ResponseEntity<Event> delete(@PathVariable Integer id) {
 

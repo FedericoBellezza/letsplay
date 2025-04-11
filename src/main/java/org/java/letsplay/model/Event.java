@@ -1,6 +1,9 @@
 package org.java.letsplay.model;
 
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +20,7 @@ import jakarta.validation.constraints.Size;
 @Table(name = "events")
 public class Event {
 
+    // states
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -95,7 +99,6 @@ public class Event {
     public void setCategory(Category category) {
         this.category = category;
     }
-
     public LocalDate getRegistrationClosingDate() {
         return this.registrationClosingDate;
     }
@@ -114,20 +117,15 @@ public class Event {
     public void setImage(String image) {
         this.image = image;
     }
-
     public Integer getPrice() {
         return this.price;
     }
-
     public void setPrice(Integer price) {
         this.price = price;
     }
-
-
     public String getMainImage() {
         return this.mainImage;
     }
-
     public void setMainImage(String mainImage) {
         this.mainImage = mainImage;
     }

@@ -14,9 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventService {
 
+    // reporitories
     @Autowired
     private EventRepository eventRepository;
 
+
+    // methods
     public List<Event> findAll(){
         return eventRepository.findAll();
     }
@@ -28,41 +31,31 @@ public class EventService {
         Page<Event> events = eventRepository.findAll(pageRequest);
         return events.getContent();
     }
-
     public Optional<Event> findById(Integer id){
         return eventRepository.findById(id);
     }
-
     public Event getById(Integer id){
         return eventRepository.findById(id).get();
     }
-
     public void save(Event event){
         eventRepository.save(event);
     }
-
     public void deleteById(Integer id){
 
         eventRepository.deleteById(id);
     }
-
-    // advanced search
     public List<Event> advancedSearch(String name, Category category, String address ){
         return eventRepository.findByNameContainingAndCategoryAndAddressContaining(name, category, address);
     }
-
     public List<Event> advancedSearchNoCategory(String name, String address ){
         return eventRepository.findByNameContainingAndAddressContaining(name, address);
     }
-
     public Event create(Event event){
         return eventRepository.save(event);
     }
-    
     public Event update(Event event){
        return eventRepository.save(event);
     }
-
     public void deleteAll(List<Event> events){
         eventRepository.deleteAll(events);
     }

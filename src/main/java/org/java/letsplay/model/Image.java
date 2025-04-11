@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "images")
 public class Image {
 
+    // states
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,18 +30,16 @@ public class Image {
     private Category category;
 
 
+    // getter e setter
     public String getUrl() {
         return this.url;
     }
-
     public void setUrl(String url) {
         this.url = url;
     }
-
     public Category getCategory() {
         return this.category;
     }
-
     public void setCategory(Category category) {
         this.category = category;
     }

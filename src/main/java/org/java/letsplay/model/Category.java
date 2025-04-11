@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "categories")
 public class Category {
 
+    // states
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -55,9 +56,12 @@ public class Category {
     public void setImages(List<Image> images) {
         this.images = images;
     }
-public Image getImageByIndex(int id){
+    public Image getImageByIndex(int id){
     return images.get(id);
 }
+    
+
+    // to string
     @Override
     public String toString() {
         return name;

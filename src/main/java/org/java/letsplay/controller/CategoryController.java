@@ -16,52 +16,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
-
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
 
+    // services
     @Autowired
     private CategoryService categoryService;
 
+
+    // routes
     @GetMapping
     public String index(Model model){
         model.addAttribute("categories", categoryService.findAll());
-
         return "category/index";
     }
-
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("categoryForm", new CategoryForm());
         return "category/create-or-edit";
     }
-    
     @PostMapping("/create")
     public String createCategory(@ModelAttribute CategoryForm categoryForm) {
         categoryService.createCategoryWithImages(categoryForm);
         return "redirect:/categories";
     }
-
-    // @GetMapping("/create")
-    // public String create(Model model){
-    //     model.addAttribute("category", new Category());
-    //     model.addAttribute("edit", false);
-
-    //     return "category/create-or-edit";
-    // }
-
-    // @PostMapping("/create")
-    // public String store(@Valid @ModelAttribute("category") Category formCategory, BindingResult bindingResult,  Model model){
-
-    //     if (bindingResult.hasErrors()) {
-    //         return "event/create-or-edit";
-    //     }
-
-    //     categoryService.save(formCategory);
-    //     return "redirect:/categories";
-    // }
-
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id,  Model model) {
         CategoryForm categoryForm = new CategoryForm();
@@ -82,8 +61,7 @@ public class CategoryController {
 
         return "category/create-or-edit";
     }
-
-   @PostMapping("/edit/{id}")
+    @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute CategoryForm categoryForm,  BindingResult bindingResult, Model model, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
@@ -106,13 +84,11 @@ public class CategoryController {
         categoryService.updateCategoryWithImages(categoryForm, id);        
         return "redirect:/categories";
     }
-
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         categoryService.deleteById(id);
         return "redirect:/categories";
     }
-
     @PostMapping("/duplicate/{id}")
     public String duplicateCategory(@PathVariable Integer id) {
         categoryService.duplicateCategory(categoryService.getById(id));

@@ -17,6 +17,7 @@ import jakarta.validation.constraints.Size;
 @Table(name = "users")
 public class User {
     
+    // states
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

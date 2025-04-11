@@ -1,9 +1,7 @@
 package org.java.letsplay.security;
 
-
 import java.util.HashSet;
 import java.util.Set;
-
 import org.java.letsplay.model.Role;
 import org.java.letsplay.model.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class DatabaseUserDetails implements UserDetails {
 
+    // states
     private final Integer id;
     private final String username;
     private final String password;

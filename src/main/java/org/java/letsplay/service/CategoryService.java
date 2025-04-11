@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService {
+
+    // services
     @Autowired
     private EventService eventService;
     @Autowired
@@ -23,23 +25,16 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
 
-    CategoryService(ImageRepository imageRepository, EventService eventService) {
-        this.imageRepository = imageRepository;
-        this.eventService = eventService;
-    }
-
+    // methods
     public List<Category> findAll(){
         return categoryRepository.findAll(Sort.by("name"));
     }   
-
     public Category getById(Integer id){
         return categoryRepository.findById(id).get();
     }
-
     public void save(Category category){
         categoryRepository.save(category);
     }
-
     public void deleteById(Integer id){
         Category category = categoryRepository.findById(id).get();
         List<Image> imagesToDelete = new ArrayList<>(category.getImages());
@@ -50,7 +45,6 @@ public class CategoryService {
 
         categoryRepository.deleteById(id);
     }
-    
     public void createCategoryWithImages(CategoryForm form) {
         Category category = new Category();
         category.setName(form.getName());
@@ -68,7 +62,6 @@ public class CategoryService {
         
         categoryRepository.save(category);
     }
-
     public void updateCategoryWithImages(CategoryForm form, Integer id) {
         Category category = categoryRepository.findById(id).get();
         category.setName(form.getName());
@@ -90,7 +83,6 @@ public class CategoryService {
         
         categoryRepository.save(category);
     }
-
     public void duplicateCategory(Category category) {
         Category newCategory = new Category();
         newCategory.setName(category.getName());

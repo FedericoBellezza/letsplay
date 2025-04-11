@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "roles")
 public class Role {
     
+    // states
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -45,4 +46,5 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
+    
 }

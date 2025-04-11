@@ -3,7 +3,6 @@ package org.java.letsplay.controller;
 import java.util.Random;
 import org.java.letsplay.model.Category;
 import org.java.letsplay.model.Event;
-import org.java.letsplay.repository.CategoryRepository;
 import org.java.letsplay.service.CategoryService;
 import org.java.letsplay.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,39 +22,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/events")
 public class EventController {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    public String chooseRandomImage(Integer categoryId) {
-        Category category = categoryRepository.findById(categoryId).get();
-        Random random = new Random();
-        if (category.getImages().size() == 0) {
-            return "https://i.postimg.cc/dtJS98Kr/hero-Image.png";
-        }
-        Integer index =  random.nextInt(category.getImages().size());
-        return category.getImageByIndex(index).getUrl();
-    }
-
+    // services
     @Autowired
     private EventService eventService;
-
     @Autowired
     private CategoryService categoryService;
 
+
+    // routes
     @GetMapping
     public String index(Model model){
         model.addAttribute("events", eventService.findAll());
         model.addAttribute("categories", categoryService.findAll());
         return "event/index";
     }
-
     @GetMapping("/sort/{sort}")
     public String indexSortBy(Model model, @PathVariable String sort) {
         model.addAttribute("events", eventService.findAllSorted(sort));
         model.addAttribute("categories", categoryService.findAll());
         return "event/index";
     }
-    
     @GetMapping("/search")
     public String advancedSearch(Model model, @RequestParam(required = false) String name,  @RequestParam(required = false) Integer category_id, @RequestParam(required = false) String address){
 
@@ -71,13 +57,11 @@ public class EventController {
         
         return "event/index";
     }
-    
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model){
         model.addAttribute("event", eventService.getById(id));
         return "event/show";
     }
-
     @GetMapping("/create")
     public String create(Model model){
         model.addAttribute("event", new Event());
@@ -85,7 +69,6 @@ public class EventController {
         model.addAttribute("edit", false);
         return "event/create-or-edit";
     }
-
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,  Model model){
 
@@ -103,7 +86,6 @@ public class EventController {
         eventService.save(formEvent);
         return "redirect:/events";
     }
-
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id,  Model model) {
         model.addAttribute("edit", true);
@@ -112,7 +94,6 @@ public class EventController {
 
         return "event/create-or-edit";
     }
-
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult, Model model,  @PathVariable Integer id) {
 
@@ -133,11 +114,21 @@ public class EventController {
         eventService.save(formEvent);        
         return "redirect:/events/{id}";
     }
-
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         eventService.deleteById(id);
         return "redirect:/events";
     }    
-
+    
+    
+    // functions
+    public String chooseRandomImage(Integer categoryId) {
+        Category category = categoryService.getById(categoryId);
+        Random random = new Random();
+        if (category.getImages().size() == 0) {
+            return "https://i.postimg.cc/dtJS98Kr/hero-Image.png";
+        }
+        Integer index =  random.nextInt(category.getImages().size());
+        return category.getImageByIndex(index).getUrl();
+    }
 }

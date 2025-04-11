@@ -46,12 +46,10 @@ function sortBy(id) {
     let cellA = rowA.cells[id].textContent.trim();
     let cellB = rowB.cells[id].textContent.trim();
 
-    // Tenta di riconoscere numeri
     let numA = parseFloat(cellA);
     let numB = parseFloat(cellB);
     let isNumber = !isNaN(numA) && !isNaN(numB);
 
-    // Tenta di riconoscere date ISO (YYYY-MM-DD)
     let dateA = new Date(cellA);
     let dateB = new Date(cellB);
     let isValidDate =
@@ -71,10 +69,8 @@ function sortBy(id) {
     }
   });
 
-  // Riappende le righe ordinate
   rows.forEach((row) => table.appendChild(row));
 
-  // Aggiorna direzione sort
   headerCell.setAttribute("data-sort-direction", isAscending ? "desc" : "asc");
 }
 
@@ -104,9 +100,9 @@ function addImageUrl() {
   div.innerHTML = `
     <div class="flex flex-col mt-5">
       <input class="rounded-lg shadow-lg border-gray-300 border ps-2 py-1" 
-             type="text" 
-             name="imageUrls[${nextIndex}]" 
-             placeholder="Inserisci URL immagine">
+            type="text" 
+            name="imageUrls[${nextIndex}]" 
+            placeholder="Inserisci URL immagine">
     </div>
     <button class="w-full border border-red-300 px-3 py-1 rounded-2xl text-gray-700 hover:bg-red-100 transition cursor-pointer mt-5 shadow-lg" 
             type="button" 
